@@ -19,9 +19,7 @@ async function loadUser(): Promise<User> {
 }
 
 export async function load({ depends }) {
-	// working for the users only... but not actually needed when i use the form and redirect
 	depends('user-load');
-	console.log('user-load');
 	const user = await loadUser();
 	return {
 		user

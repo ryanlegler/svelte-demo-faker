@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto, invalidate, invalidateAll } from '$app/navigation';
+	import { invalidate, invalidateAll } from '$app/navigation';
 	import { send, receive } from '$lib/transitions/transitions';
 	import { flip } from 'svelte/animate';
 	import User from '$lib/components/User.svelte';
@@ -20,7 +20,7 @@
 		});
 
 		await response.json();
-		invalidate('root-load');
+		invalidateAll();
 	}
 	async function handleOnReject() {
 		invalidate('user-load');
