@@ -14,7 +14,7 @@ async function loadUser(): Promise<User> {
 				key: crypto.getRandomValues(new Uint32Array(1))[0]
 			};
 			resolve(user);
-		}, 300);
+		}, 800);
 	});
 }
 

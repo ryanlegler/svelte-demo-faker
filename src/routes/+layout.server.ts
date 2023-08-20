@@ -1,7 +1,8 @@
 import { supabase } from '$lib/supabase';
 import type { User } from '$lib/components/user';
 
-export async function load() {
+export async function load({ depends }) {
+	depends('users-load');
 	const { data: users } = await supabase
 		.from('users')
 		.select('firstName, lastName, birthday, sex, avatar, key, email, id')

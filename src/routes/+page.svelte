@@ -10,7 +10,7 @@
 
 	$: userOptimistic = [data.user];
 	async function handleOnReject() {
-		userOptimistic = [];
+		userOptimistic = [{ key: 1234 } as unknown as UserModel];
 		invalidate('user-load');
 	}
 
@@ -19,8 +19,8 @@
 
 	async function handleOnClick() {
 		usersOptimistic = [data.user, ...usersOptimistic];
-		userOptimistic = [];
-
+		userOptimistic = [{ key: 1234 } as unknown as UserModel];
+		// invalidate('user-load');
 		const response = await fetch('/', {
 			method: 'POST',
 			body: JSON.stringify({ user: data.user, users: usersOptimistic }),
@@ -30,6 +30,7 @@
 		});
 
 		await response.json();
+		// invalidate('users-load');
 		invalidateAll();
 	}
 </script>
@@ -40,7 +41,7 @@
 </svelte:head>
 
 <section class="m-3 grid grid-cols-1 gap-5 md:grid-cols-2">
-	<div class="flex gap-5 flex-col">
+	<div class="flex gap-5 flex-col relative">
 		{#each userOptimistic as user (user.key)}
 			<div
 				in:receive={{ key: user.key }}
