@@ -3,7 +3,7 @@
 	export let handleOnReject: () => void = null as unknown as () => void;
 	export let handleOnClick: () => void = null as unknown as () => void;
 	export let user: User;
-	$: ({ avatar, firstName, email, lastName, sex } = user);
+	$: ({ avatar, firstName, email, lastName, sex, key } = user);
 </script>
 
 <div class="h-full border-white rounded-md p-4 border-2 bg-slate-900">

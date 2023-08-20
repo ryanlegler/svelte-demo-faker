@@ -3,17 +3,27 @@
 	import { send, receive } from '$lib/transitions/transitions';
 	import { flip } from 'svelte/animate';
 	import User from '$lib/components/User.svelte';
+	import type { User as UserModel } from '$lib/components/user';
 
 	export let data;
+	export let userOptimistic: UserModel[] = [];
 
-	$: user = data.user || {};
-	$: users = data.users || [];
-	$: userStack = [user];
+	$: userOptimistic = [data.user];
+	async function handleOnReject() {
+		userOptimistic = [];
+		invalidate('user-load');
+	}
+
+	export let usersOptimistic: UserModel[] = [];
+	$: usersOptimistic = data.users || [];
 
 	async function handleOnClick() {
+		usersOptimistic = [data.user, ...usersOptimistic];
+		userOptimistic = [];
+
 		const response = await fetch('/', {
 			method: 'POST',
-			body: JSON.stringify({ user, users }),
+			body: JSON.stringify({ user: data.user, users: usersOptimistic }),
 			headers: {
 				'content-type': 'application/json'
 			}
@@ -21,9 +31,6 @@
 
 		await response.json();
 		invalidateAll();
-	}
-	async function handleOnReject() {
-		invalidate('user-load');
 	}
 </script>
 
@@ -34,10 +41,10 @@
 
 <section class="m-3 grid grid-cols-1 gap-5 md:grid-cols-2">
 	<div class="flex gap-5 flex-col">
-		{#each userStack as user (user.id)}
+		{#each userOptimistic as user (user.key)}
 			<div
-				in:receive={{ key: user.id }}
-				out:send={{ key: user.id }}
+				in:receive={{ key: user.key }}
+				out:send={{ key: user.key }}
 				animate:flip={{ duration: 300 }}
 			>
 				<User {user} {handleOnClick} {handleOnReject} />
@@ -46,12 +53,12 @@
 	</div>
 
 	<div class="flex gap-5 flex-col">
-		{#each users as user, index (user.id)}
+		{#each usersOptimistic as user, index (user.key)}
 			<div
-				style={`z-index: ${users.length - index}`}
+				style={`z-index: ${usersOptimistic.length - index}`}
 				class="h-full"
-				in:receive={{ key: user.id }}
-				out:send={{ key: user.id }}
+				in:receive={{ key: user.key }}
+				out:send={{ key: user.key }}
 				animate:flip={{ duration: 300 }}
 			>
 				<User {user} />

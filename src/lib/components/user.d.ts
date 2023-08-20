@@ -5,5 +5,6 @@ export type User = {
 	firstName: string;
 	lastName: string;
 	sex: string;
-	id: number;
+	id?: number;
+	key: number;
 };

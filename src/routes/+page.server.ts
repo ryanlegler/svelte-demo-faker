@@ -11,10 +11,10 @@ async function loadUser(): Promise<User> {
 				firstName: faker.name.firstName(),
 				lastName: faker.name.lastName(),
 				sex: faker.name.sexType(),
-				id: crypto.getRandomValues(new Uint32Array(1))[0]
+				key: crypto.getRandomValues(new Uint32Array(1))[0]
 			};
 			resolve(user);
-		}, 10);
+		}, 300);
 	});
 }
 
