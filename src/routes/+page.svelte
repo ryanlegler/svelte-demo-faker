@@ -32,31 +32,17 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section class="m-10 grid grid-cols-2 gap-5">
+<section class="m-3 grid grid-cols-1 gap-5 md:grid-cols-2">
 	<div class="flex gap-5 flex-col">
 		{#each userStack as user (user.id)}
-			<h1
-				class="text-4xl font-bold underline"
+			<div
 				in:receive={{ key: user.id }}
 				out:send={{ key: user.id }}
-				animate:flip={{ duration: 900 }}
+				animate:flip={{ duration: 300 }}
 			>
 				<User {user} {handleOnClick} {handleOnReject} />
-			</h1>
+			</div>
 		{/each}
-		<!-- <div>
-			<button
-				on:click={handleOnClick}
-				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-slate-600"
-				>Accept</button
-			>
-
-			<button
-				on:click={handleOnReject}
-				class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded disabled:bg-slate-600"
-				>Reject</button
-			>
-		</div> -->
 	</div>
 
 	<div class="flex gap-5 flex-col">
@@ -66,7 +52,7 @@
 				class="h-full"
 				in:receive={{ key: user.id }}
 				out:send={{ key: user.id }}
-				animate:flip={{ duration: 900 }}
+				animate:flip={{ duration: 300 }}
 			>
 				<User {user} />
 			</div>

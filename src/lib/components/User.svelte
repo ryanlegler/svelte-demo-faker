@@ -8,36 +8,34 @@
 
 <div class="h-full border-white rounded-md p-4 border-2 bg-slate-900">
 	<div class="flex items-center justify-center gap-4">
-		<img class="rounded-full" src={avatar} alt="user avatar" width="100" height="100" />
+		<div class="w-[75px]">
+			<img class="rounded-full" src={avatar} alt="user avatar" width="100%" height="100%" />
+		</div>
 
 		<div class="flex flex-col w-full gap-1 items-start">
-			<span class="sm:text-xl text-m font-bold">
+			<span class="text-m font-bold">
 				{firstName}
 				{lastName}
 			</span>
-			<span class="sm:text-l text-xs text-ellipsis max-w-full overflow-hidden">
+			<span class="text-xs text-ellipsis max-w-full overflow-hidden">
 				{email}
 			</span>
-			<span
-				class="sm:text-l text-xs text-ellipsis overflow-hidden bg-slate-600 px-2 py-1 rounded-md"
-			>
+			<span class="text-xs text-ellipsis overflow-hidden bg-slate-600 px-2 py-1 rounded-md">
 				{sex}
 			</span>
 		</div>
-		<div class="text-sm flex gap-2">
+		<div class="flex gap-4">
 			{#if !!handleOnReject}
 				<button
 					on:click={handleOnClick}
-					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-slate-600"
-					>Accept</button
+					class="text-[30px] transition-transform origin-center hover:scale-[1.3]">✅</button
 				>
 			{/if}
 
 			{#if !!handleOnClick}
 				<button
 					on:click={handleOnReject}
-					class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded disabled:bg-slate-600"
-					>Reject</button
+					class="text-[30px] transition-transform origin-center hover:scale-[1.3]">❌</button
 				>
 			{/if}
 		</div>
