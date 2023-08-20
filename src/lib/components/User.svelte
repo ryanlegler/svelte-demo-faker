@@ -8,7 +8,7 @@
 
 <div class="h-full border-white rounded-md p-4 border-2 bg-slate-900">
 	<div class="flex items-center justify-center gap-4">
-		<div class="w-[75px]">
+		<div class="flex-grow-0 flex-shrink-0 basis-[70px]">
 			<img class="rounded-full" src={avatar} alt="user avatar" width="100%" height="100%" />
 		</div>
 
