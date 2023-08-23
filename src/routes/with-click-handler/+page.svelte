@@ -21,7 +21,7 @@
 		usersOptimistic = [data.user, ...usersOptimistic];
 		userOptimistic = [{ key: 1234 } as unknown as UserModel];
 		// invalidate('user-load');
-		const response = await fetch('/', {
+		const response = await fetch('/with-click-handler', {
 			method: 'POST',
 			body: JSON.stringify({ user: data.user, users: usersOptimistic }),
 			headers: {

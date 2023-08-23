@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import type { User } from '$lib/components/user';
 
-async function loadUser(): Promise<User> {
+export async function loadUser(): Promise<User> {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			const user = {
@@ -16,12 +16,4 @@ async function loadUser(): Promise<User> {
 			resolve(user);
 		}, 800);
 	});
-}
-
-export async function load({ depends }) {
-	depends('user-load');
-	const user = await loadUser();
-	return {
-		user
-	};
 }

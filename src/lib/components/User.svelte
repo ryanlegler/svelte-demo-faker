@@ -2,6 +2,8 @@
 	import type { User } from './user';
 	export let handleOnReject: () => void = null as unknown as () => void;
 	export let handleOnClick: () => void = null as unknown as () => void;
+	export let onRejectformaction: string = null as unknown as string;
+	export let onClickformaction: string = null as unknown as string;
 	export let user: User;
 	$: ({ avatar, firstName, email, lastName, sex, key } = user);
 </script>
@@ -46,15 +48,17 @@
 				</span>
 			</div>
 			<div class="flex gap-4">
-				{#if !!handleOnReject}
+				{#if !!handleOnClick || !!onClickformaction}
 					<button
+						formaction={onClickformaction}
 						on:click={handleOnClick}
 						class="text-[30px] transition-transform origin-center hover:scale-[1.3]">✅</button
 					>
 				{/if}
 
-				{#if !!handleOnClick}
+				{#if !!handleOnReject || !!onRejectformaction}
 					<button
+						formaction={onRejectformaction}
 						on:click={handleOnReject}
 						class="text-[30px] transition-transform origin-center hover:scale-[1.3]">❌</button
 					>
